@@ -18,8 +18,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 You will need the following:
 
-    1. AWS CLI (look at the documentation of the included pdf file)
-    2. AWS Account and User (look at the documentation of the included pdf file)
+    1. AWS CLI (look at the documentation or the included pdf file)
+    2. AWS Account and User (look at the documentation or the included pdf file)
     3. Node.js
     4. IDE for your programming language
     5. AWS CDK Toolkit

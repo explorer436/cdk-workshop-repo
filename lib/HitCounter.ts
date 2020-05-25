@@ -16,7 +16,7 @@ export class HitCounter extends cdk.Construct {
     // the hit counter table
     public readonly table: dynamodb.Table; 
 
-    constructor(scope: cdk.Construct, id: string, props: HitCounterProps){
+    constructor(scope: cdk.Construct, id: string, props: HitCounterProps) {
         super(scope, id);
 
         const table = new dynamodb.Table(this, 'Hits', {

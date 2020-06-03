@@ -7,19 +7,20 @@ import * as apigateway from '@aws-cdk/aws-apigateway';
 import { LambdaSubscription } from '@aws-cdk/aws-sns-subscriptions';
 import { HitCounter } from './HitCounter';
 import { TableViewer } from 'cdk-dynamo-table-viewer';
+import { EmployeeConstruct } from './EmployeeConstruct';
 
-export class CdkWorkshopStack extends cdk.Stack {
+export class EmployeeCdkStack extends cdk.Stack {
 
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    /*const queue = new sqs.Queue(this, 'CdkWorkshopQueue', {
+    const queue = new sqs.Queue(this, 'CdkWorkshopQueue', {
       visibilityTimeout: cdk.Duration.seconds(300)
     });
 
     const topic = new sns.Topic(this, 'CdkWorkshopTopic');
 
-    topic.addSubscription(new subs.SqsSubscription(queue));*/
+    topic.addSubscription(new subs.SqsSubscription(queue));
 
     const hello = new lambda.Function(this, 'HelloHandler', {
         runtime: lambda.Runtime.NODEJS_12_X,
@@ -30,6 +31,8 @@ export class CdkWorkshopStack extends cdk.Stack {
     const helloWithCounter = new HitCounter(this, 'HelloHitCounter', {
       downstream: hello
     });
+
+    const employeeConstruct = new EmployeeConstruct(this, 'EmployeeConstruct' );
 
     // defines an API Gateway REST API resource backed by our "hello" function
     new apigateway.LambdaRestApi(this, 'Endpoint', {

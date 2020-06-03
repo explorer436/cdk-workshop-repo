@@ -1,0 +1,1 @@
+Set up directions for working with AWS SAM in local machines.

@@ -7,7 +7,8 @@ exports.handler = async function(event) {
     const dynamoDB = new DynamoDB();
     const lambda = new Lambda();
 
-    // update dynamo entry for "path" with hits++
+    // update dynamo entry for "path" with hits++.
+    // 'S' in the Key stands for String.
     await dynamoDB.updateItem({
         TableName: process.env.HITS_TABLE_NAME,
         Key: { path: { S: event.path }},

@@ -8,10 +8,10 @@ export interface HitCounterProps {
     downstream: lambda.IFunction;
 }
 
-export class HitCounter extends cdk.Construct {
+export class HitCounterConstruct extends cdk.Construct {
 
     // public variable that allows accessing the counter function in hitCounter.js
-    public readonly handler: lambda.Function;
+    public readonly hitCounterLambdaFunction: lambda.Function;
 
     // public variable for the hit counter table
     public readonly table: dynamodb.Table; 
@@ -25,7 +25,7 @@ export class HitCounter extends cdk.Construct {
         // exposing the table as a public property so that the entire stack can access it.
         this.table = hitsTable;
 
-        this.handler = new lambda.Function(this, 'HitCounterHandler', {
+        this.hitCounterLambdaFunction = new lambda.Function(this, 'HitCounterHandler', {
             runtime: lambda.Runtime.NODEJS_12_X,
             handler: 'hitCounter.handler',
             code: lambda.Code.fromAsset('lambdas'),
@@ -36,9 +36,9 @@ export class HitCounter extends cdk.Construct {
         });
 
         // grant the lambda role read/write permissions to our table
-        hitsTable.grantReadWriteData(this.handler);
+        hitsTable.grantReadWriteData(this.hitCounterLambdaFunction);
 
         // grant the lambda role invoke permissions to the downstream function
-        props.downstream.grantInvoke(this.handler);
+        props.downstream.grantInvoke(this.hitCounterLambdaFunction);
     }
 }

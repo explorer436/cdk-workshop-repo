@@ -20,6 +20,13 @@ You will need the following:
 
     1. AWS CLI (look at the documentation or the included pdf file)
     2. AWS Account and User (look at the documentation or the included pdf file)
+       To use them with the CDK application, run 'aws configure'.
+       We have to provide the following:
+       aws_access_key_id (IAM)
+       aws_secret_access_key (IAM)
+       region
+       default output format (json/text/yaml)
     3. Node.js
     4. IDE for your programming language
     5. AWS CDK Toolkit
+       To install AWS CDK Toolkit globally using Node Package Manager : npm install -g aws-cdk

@@ -8,6 +8,7 @@ import { LambdaSubscription } from '@aws-cdk/aws-sns-subscriptions';
 import { HitCounterConstruct } from './HitCounter';
 import { TableViewer } from 'cdk-dynamo-table-viewer';
 import { EmployeeConstruct } from './EmployeeConstruct';
+import { UserConstruct } from './UserConstruct';
 import { LambdaIntegration } from '@aws-cdk/aws-apigateway';
 
 export class EmployeeCdkStack extends cdk.Stack {
@@ -35,6 +36,8 @@ export class EmployeeCdkStack extends cdk.Stack {
 
     const employeeConstruct = new EmployeeConstruct(this, 'EmployeeConstruct' );
 
+    const userConstruct = new UserConstruct(this, 'UserConstruct' );
+
     // defines an API Gateway REST API resource backed by our "hello" function
     // this forwards all the requests from the gateway to the same handler. 
     // if we want to add multiple resources to the gateway, see the implementation below.
@@ -44,7 +47,7 @@ export class EmployeeCdkStack extends cdk.Stack {
     });
     */
 
-    const apiGateway = new apigateway.RestApi(this, 'my-custom-api');
+    const apiGateway = new apigateway.RestApi(this, 'my-custom-apis');
     apiGateway.root.addMethod('ANY'); // route this to helloWithCounter.handler
 
     const genericResource= apiGateway.root.addResource('generic');
@@ -73,6 +76,11 @@ export class EmployeeCdkStack extends cdk.Stack {
     employeesResource.addMethod('GET', new LambdaIntegration(employeeConstruct.getEmployeeLambdaFn));
     // employeesResource.addMethod('GET', new LambdaIntegration(employeeConstruct.getEmployeeLambdaFn));
     employeesResource.addMethod('POST', new LambdaIntegration(employeeConstruct.saveEmployeeLambdaFn));
+
+    const usersResource = apiGateway.root.addResource('users');
+    usersResource.addMethod('GET', new LambdaIntegration(userConstruct.getUserLambdaFn));
+    // usersResource.addMethod('GET', new LambdaIntegration(employeeConstruct.getEmployeeLambdaFn));
+    usersResource.addMethod('POST', new LambdaIntegration(userConstruct.saveUserLambdaFn));
 
     /*
     * 

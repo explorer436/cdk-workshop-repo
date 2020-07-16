@@ -30,3 +30,7 @@ You will need the following:
     4. IDE for your programming language
     5. AWS CDK Toolkit
        To install AWS CDK Toolkit globally using Node Package Manager : npm install -g aws-cdk
+       
+## TODO
+
+Set up directions for working with AWS SAM in local machines.

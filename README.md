@@ -41,3 +41,8 @@ Set up directions for working with AWS SAM in local machines.
 A newer version of the CDK CLI (>= 2.0.0) is necessary to interact with this app
 
 well to anybody having the came issue there is a cdk command in package.json for a reason. Just use that since it will always be inline with your local cdk version ie: yarn cdk synth
+
+## Outstanding questions
+
+Can the schema of a NoSQL table be updated later? If so, can the data be migrated into the new table?
+
